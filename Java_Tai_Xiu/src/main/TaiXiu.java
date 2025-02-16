@@ -1,5 +1,7 @@
 package main;
 
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -16,6 +18,9 @@ public class TaiXiu {
 	public static void main(String[] args) {
 		double taiKhoanNguoiChoi = 5000;
 		Scanner scanner = new Scanner(System.in);
+		@SuppressWarnings("deprecation")
+		Locale locale = new Locale("vi", "VN");
+		NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 		int luaChon = 1;
 		do {
 			System.out.println("Chọn (1) để tiếp tục chơi.");
@@ -25,7 +30,7 @@ public class TaiXiu {
 			
 			if (luaChon == 1) {
 				System.out.println("BẮT ĐẦU CHƠI");
-				System.out.println("- Tài khoản của bạn là: " + taiKhoanNguoiChoi + ", bạn muốn cược bao nhiêu?");
+				System.out.println("- Tài khoản của bạn là: " + numberFormat.format(taiKhoanNguoiChoi) + ", bạn muốn cược bao nhiêu?");
 				
 				// Số tiền đặt cược				
 				double datCuoc = scanner.nextDouble();
@@ -33,7 +38,7 @@ public class TaiXiu {
 					System.out.print("Số tiền cược cần <= " + taiKhoanNguoiChoi + " và lớn hơn 0. Vui nhập lại số tiền cược: ");
 					datCuoc = scanner.nextDouble();
 				}
-				System.out.println("- Ban đã đặt cược: " + datCuoc);
+				System.out.println("- Ban đã đặt cược: " + numberFormat.format(datCuoc));
 				System.out.println("---------------------------");
 				
 				// Lựa chọn Tài hay Xỉu				
@@ -66,27 +71,27 @@ public class TaiXiu {
 				
 				// Phân định thắng thua cho người chơi
 				if (tong == 3 || tong == 18) {
-					System.out.println("Nhà cái thắng. Bạn mất " + datCuoc + " tiền cược");
+					System.out.println("Nhà cái thắng. Bạn mất " + numberFormat.format(datCuoc) + " tiền cược");
 					taiKhoanNguoiChoi -= datCuoc;
 				} else if (tong >= 11 && tong <= 17) {
 					if (luaChonTaiXiu == 1) {
 						taiKhoanNguoiChoi += datCuoc;
-						System.out.println("Bạn thắng. Bạn nhận thêm " + datCuoc + " tiền cược");
+						System.out.println("Bạn thắng. Bạn nhận thêm " + numberFormat.format(datCuoc) + " tiền cược");
 					} else {
 						taiKhoanNguoiChoi -= datCuoc;
-						System.out.println("Bạn thua. Bạn mất " + datCuoc + " tiền cược");
+						System.out.println("Bạn thua. Bạn mất " + numberFormat.format(datCuoc) + " tiền cược");
 					}
 				} else {
 					if (luaChonTaiXiu == 2) {
 						taiKhoanNguoiChoi += datCuoc;
-						System.out.println("Bạn thắng. Bạn nhận thêm " + datCuoc + " tiền cược");
+						System.out.println("Bạn thắng. Bạn nhận thêm " + numberFormat.format(datCuoc) + " tiền cược");
 					} else {
 						taiKhoanNguoiChoi -= datCuoc;
-						System.out.println("Bạn thua. Bạn mất " + datCuoc + " tiền cược");
+						System.out.println("Bạn thua. Bạn mất " + numberFormat.format(datCuoc) + " tiền cược");
 					}
 				}
 				
-				System.out.println("Số tiền của bạn hiện tại là: " + taiKhoanNguoiChoi);
+				System.out.println("Số tiền của bạn hiện tại là: " + numberFormat.format(taiKhoanNguoiChoi));
 				System.out.println("---------------------------");
 			}
 		} while (luaChon == 1 && taiKhoanNguoiChoi > 0);
