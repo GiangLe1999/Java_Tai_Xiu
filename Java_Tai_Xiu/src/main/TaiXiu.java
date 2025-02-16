@@ -17,10 +17,15 @@ import java.util.Scanner;
 public class TaiXiu {
 	public static void main(String[] args) {
 		double taiKhoanNguoiChoi = 5000;
+		
+		// Khởi tại scanner
 		Scanner scanner = new Scanner(System.in);
 		@SuppressWarnings("deprecation")
+		
+		// Khởi tạo numberFormat
 		Locale locale = new Locale("vi", "VN");
-		NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
+		NumberFormat numberFormat = NumberFormat.getCurrencyInstance(locale);
+		
 		int luaChon = 1;
 		do {
 			System.out.println("Chọn (1) để tiếp tục chơi.");
@@ -35,7 +40,7 @@ public class TaiXiu {
 				// Số tiền đặt cược				
 				double datCuoc = scanner.nextDouble();
 				while (datCuoc <= 0 || datCuoc > taiKhoanNguoiChoi) {
-					System.out.print("Số tiền cược cần <= " + taiKhoanNguoiChoi + " và lớn hơn 0. Vui nhập lại số tiền cược: ");
+					System.out.print("Số tiền cược cần <= " + numberFormat.format(taiKhoanNguoiChoi) + " và lớn hơn 0. Vui nhập lại số tiền cược: ");
 					datCuoc = scanner.nextDouble();
 				}
 				System.out.println("- Ban đã đặt cược: " + numberFormat.format(datCuoc));
